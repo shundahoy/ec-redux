@@ -1,30 +1,32 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import {
-  // CartList,
-  // CheckoutWrapper,
-  // OrderConfirm,
-  // OrderComplete,
-  // OrderHistory,
-  // Menus,
-  // ProductDetail,
-  // ProductEdit,
-  // ProductList,
-  // Reset,
-  // SignIn,
-  SignUp,
-  // UserMyPage,
-} from "./templates";
-import { Login, Home, SignIn } from "./templates";
-// import Auth from "./Auth";
+// import // CartList,
+// CheckoutWrapper,
+// OrderConfirm,
+// OrderComplete,
+// OrderHistory,
+// Menus,
+// ProductDetail,
+// ProductEdit,
+// ProductList,
+// Reset,
+// SignIn,
+// SignUp,
+// UserMyPage,
+// "./templates";
+import { Home, SignIn, Reset, SignUp, ProductEdit } from "./templates";
+import Auth from "./Auth";
 
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/login" component={Login} />
-      <Route exact path="(/)?" component={Home} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signin/reset" component={Reset} />
+      <Auth>
+        <Route exact path="(/)?" component={Home} />
+        <Route path="/product/edit(/:id)?" component={ProductEdit} />
+      </Auth>
 
       {/* <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signin/reset" component={Reset} />

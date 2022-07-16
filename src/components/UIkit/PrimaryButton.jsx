@@ -23,7 +23,7 @@ const PrimaryButton = (props) => {
     // const classes = useStyles()
 
     return (
-        <Button  variant="contained" onClick={() => props.onClick()}>
+        <Button color='primary' variant="contained" onClick={() => props.onClick()}>
             {props.label}
         </Button>
     );

@@ -73,40 +73,40 @@ const usersRef = db.collection("users");
 //   };
 // };
 
-// export const listenAuthState = () => {
-//   return async (dispatch) => {
-//     return auth.onAuthStateChanged((user) => {
-//       if (user) {
-//         usersRef
-//           .doc(user.uid)
-//           .get()
-//           .then((snapshot) => {
-//             const data = snapshot.data();
-//             if (!data) {
-//               throw new Error("ユーザーデータが存在しません。");
-//             }
+export const listenAuthState = () => {
+  return async (dispatch) => {
+    return auth.onAuthStateChanged((user) => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((snapshot) => {
+            const data = snapshot.data();
+            if (!data) {
+              throw new Error("ユーザーデータが存在しません。");
+            }
 
-//             // Update logged in user state
-//             dispatch(
-//               signInAction({
-//                 customer_id: data.customer_id ? data.customer_id : "",
-//                 email: data.email,
-//                 isSignedIn: true,
-//                 payment_method_id: data.payment_method_id
-//                   ? data.payment_method_id
-//                   : "",
-//                 role: data.role,
-//                 uid: user.uid,
-//                 username: data.username,
-//               })
-//             );
-//           });
-//       } else {
-//         dispatch(push("/signin"));
-//       }
-//     });
-//   };
-// };
+            // Update logged in user state
+            dispatch(
+              signInAction({
+                customer_id: data.customer_id ? data.customer_id : "",
+                email: data.email,
+                isSignedIn: true,
+                payment_method_id: data.payment_method_id
+                  ? data.payment_method_id
+                  : "",
+                role: data.role,
+                uid: user.uid,
+                username: data.username,
+              })
+            );
+          });
+      } else {
+        dispatch(push("/signin"));
+      }
+    });
+  };
+};
 
 export const signUp = (username, email, password, confirmPassword) => {
   return async (dispatch) => {
@@ -172,26 +172,26 @@ export const signUp = (username, email, password, confirmPassword) => {
   };
 };
 
-// export const resetPassword = (email) => {
-//   return async (dispatch) => {
-//     if (!isValidEmailFormat(email)) {
-//       alert("メールアドレスの形式が不正です。");
-//       return false;
-//     } else {
-//       return auth
-//         .sendPasswordResetEmail(email)
-//         .then(() => {
-//           alert(
-//             "入力されたアドレス宛にパスワードリセットのメールをお送りしましたのでご確認ください。"
-//           );
-//           dispatch(push("/signin"));
-//         })
-//         .catch(() => {
-//           alert("登録されていないメールアドレスです。もう一度ご確認ください。");
-//         });
-//     }
-//   };
-// };
+export const resetPassword = (email) => {
+  return async (dispatch) => {
+    if (email === "") {
+      alert("メールアドレスの形式が不正です。");
+      return false;
+    } else {
+      return auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          alert(
+            "入力されたアドレス宛にパスワードリセットのメールをお送りしましたのでご確認ください。"
+          );
+          dispatch(push("/signin"));
+        })
+        .catch(() => {
+          alert("登録されていないメールアドレスです。もう一度ご確認ください。");
+        });
+    }
+  };
+};
 
 // export const saveAddress = (address) => {
 //   return async (dispatch, getState) => {
@@ -272,34 +272,34 @@ export const signIn = (email, password) => {
   };
 };
 
-// export const signOut = () => {
-//   return async (dispatch, getState) => {
-//     // dispatch(showLoadingAction("Sign out..."));
-//     const uid = getState().users.uid;
+export const signOut = () => {
+  return async (dispatch, getState) => {
+    // dispatch(showLoadingAction("Sign out..."));
+    const uid = getState().users.uid;
 
-//     // Delete products from the user's cart
-//     await usersRef
-//       .doc(uid)
-//       .collection("cart")
-//       .get()
-//       .then((snapshots) => {
-//         snapshots.forEach((snapshot) => {
-//           usersRef.doc(uid).collection("cart").doc(snapshot.id).delete();
-//         });
-//       });
+    // Delete products from the user's cart
+    // await usersRef
+    //   .doc(uid)
+    //   .collection("cart")
+    //   .get()
+    //   .then((snapshots) => {
+    //     snapshots.forEach((snapshot) => {
+    //       usersRef.doc(uid).collection("cart").doc(snapshot.id).delete();
+    //     });
+    //   });
 
-//     // Sign out with Firebase Authentication
-//     auth
-//       .signOut()
-//       .then(() => {
-//         dispatch(signOutAction());
-//         dispatch(initProductsAction());
-//         // dispatch(hideLoadingAction());
-//         dispatch(push("/signin"));
-//       })
-//       .catch(() => {
-//         // dispatch(hideLoadingAction());
-//         throw new Error("ログアウトに失敗しました。");
-//       });
-//   };
-// };
+    // Sign out with Firebase Authentication
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(signOutAction());
+        // dispatch(initProductsAction());
+        // dispatch(hideLoadingAction());
+        dispatch(push("/signin"));
+      })
+      .catch(() => {
+        // dispatch(hideLoadingAction());
+        throw new Error("ログアウトに失敗しました。");
+      });
+  };
+};

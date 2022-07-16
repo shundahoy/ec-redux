@@ -9,7 +9,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 
 // Import reducers
 // import { LoadingReducer } from "../loading/reducers";
-// import { ProductsReducer } from "../products/reducers";
+import { ProductsReducer } from "../products/reducers";
 import { UsersReducer } from "../users/reducers";
 
 // createStoreの再定義 - historyを引数で受け、connected-react-routerの利用を抽象化
@@ -28,7 +28,7 @@ export default function createStore(history) {
     // オリジナル createStore の別名
     combineReducers({
       //   loading: LoadingReducer,
-      //   products: ProductsReducer,
+      products: ProductsReducer,
       router: connectRouter(history),
       users: UsersReducer,
     }),
