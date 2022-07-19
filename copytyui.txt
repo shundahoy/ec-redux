@@ -1,3 +1,7 @@
 1.products/operations.jsにてタイムスタンプは↓
 import { db, FirebaseTimestamp, FirebaseFieldValue } from "../../firebase";
 const timestamp = FirebaseFieldValue.serverTimestamp();
+
+画像がうまくアップロードできない時は
+event.target.files → event.target.files[0]　に修正
+new Blob(file, ...)　→ new Blob([file], ...)　に修正するとうまくいくと思います！
