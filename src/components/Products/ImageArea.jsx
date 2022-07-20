@@ -9,8 +9,6 @@ import ImagePreview from './ImagePreview';
 const ImageArea = (props) => {
     const dispatch = useDispatch();
     const images = props.images;
-    console.log(images)
-
     const deleteImage = useCallback(async (id) => {
         const ret = window.confirm('この画像を削除しますか？')
         if (!ret) {

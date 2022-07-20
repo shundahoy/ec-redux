@@ -5,3 +5,7 @@ const timestamp = FirebaseFieldValue.serverTimestamp();
 画像がうまくアップロードできない時は
 event.target.files → event.target.files[0]　に修正
 new Blob(file, ...)　→ new Blob([file], ...)　に修正するとうまくいくと思います！
+
+動画の25:13で「TypeError: Cannot read property ‘down’ of undefined」というエラーがあったと思いますが、
+原因は動画の14:38でuseStylesを定義した際、「import {makeStyles} from “@material-ui/styles”」が自動生成になったことだと思います。
+25:15のMuiThemeProviderの方法も良いですが、「import { makeStyles } from “@material-ui/core/Styles”」であれば上記のエラーを解決できると思います。

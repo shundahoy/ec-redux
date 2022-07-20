@@ -2,9 +2,9 @@ import { db, auth, FirebaseTimestamp } from "../../firebase/index";
 import {
   signOutAction,
   signInAction,
-  //   editProfileStateAction,
-  //   fetchProductsInCartAction,
-  //   fetchOrdersHistoryAction,
+  editProfileStateAction,
+  fetchProductsInCartAction,
+  fetchOrdersHistoryAction,
 } from "./actions";
 import { push, goBack } from "connected-react-router";
 // import {
@@ -16,15 +16,15 @@ import { push, goBack } from "connected-react-router";
 
 const usersRef = db.collection("users");
 
-// export const addProductToCart = (addedProduct) => {
-//   return async (dispatch, getState) => {
-//     const uid = getState().users.uid;
-//     const cartRef = usersRef.doc(uid).collection("cart").doc();
-//     addedProduct["cartId"] = cartRef.id;
-//     await cartRef.set(addedProduct);
-//     dispatch(push("/cart"));
-//   };
-// };
+export const addProductToCart = (addedProduct) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const cartRef = usersRef.doc(uid).collection("cart").doc();
+    addedProduct["cartId"] = cartRef.id;
+    await cartRef.set(addedProduct);
+    dispatch(push("/cart"));
+  };
+};
 
 // export const editUserProfile = (iconPath, introduction, uid, username) => {
 //   return async (dispatch) => {
@@ -67,11 +67,11 @@ const usersRef = db.collection("users");
 //   };
 // };
 
-// export const fetchProductsInCart = (products) => {
-//   return async (dispatch) => {
-//     dispatch(fetchProductsInCartAction(products));
-//   };
-// };
+export const fetchProductsInCart = (products) => {
+  return async (dispatch) => {
+    dispatch(fetchProductsInCartAction(products));
+  };
+};
 
 export const listenAuthState = () => {
   return async (dispatch) => {
