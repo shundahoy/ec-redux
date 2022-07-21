@@ -10,8 +10,16 @@ service cloud.firestore {
         allow read: if request.auth.uid == userId;
         allow write: if request.auth.uid == userId;
       }
+      match /orders/{orderId}{
+        allow read: if request.auth.uid == userId;
+        allow write: if request.auth.uid == userId;
+      }
     }
     match /products/{productId}{
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    }
+    match /categories/{categoryId}{
       allow read: if request.auth.uid != null;
       allow write: if request.auth.uid != null;
     }

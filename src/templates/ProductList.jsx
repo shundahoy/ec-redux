@@ -14,7 +14,7 @@ const ProductList = () => {
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : ""
 
     useEffect(() => {
-        dispatch(fetchProducts())
+        dispatch(fetchProducts(gender,category))
     },[query])
 
     return (

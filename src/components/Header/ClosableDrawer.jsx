@@ -54,11 +54,7 @@ const ClosableDrawer = (props) => {
     };
 
     const [searchKeyword, setSearchKeyword] = useState(""),
-          [filters, setFilters] = useState([
-              {func: selectMenu, label: "すべて",    id: "all",    value: "/"              },
-              {func: selectMenu, label: "メンズ",    id: "male",   value: "/?gender=male"  },
-              {func: selectMenu, label: "レディース", id: "female", value: "/?gender=female"},
-          ]);
+          [filters, setFilters] = useState([]);
 
     const menus = [
         {func: selectMenu, label: "商品登録",    icon: <AddCircleIcon/>, id: "register", value: "/product/edit"},
@@ -74,7 +70,11 @@ const ClosableDrawer = (props) => {
                     const category = snapshot.data()
                     list.push({func: selectMenu, label: category.name, id: category.id, value: `/?category=${category.id}`})
                 })
-                setFilters(prevState => [...prevState, ...list])
+                setFilters([
+                {func: selectMenu, label: "すべて",    id: "all",  value: "/"},
+                {func: selectMenu, label: "メンズ",    id: "male",   value: "/?gender=male"  },
+                {func: selectMenu, label: "レディース", id: "female", value: "/?gender=female"},
+                ...list])
             });
     },[])
 

@@ -16,7 +16,7 @@ const ProductEdit = () => {
           [description, setDescription] = useState(""),
           [images, setImages] = useState([]),
           [category, setCategory] = useState(""),
-        //   [categories, setCategories] = useState([]),
+          [categories, setCategories] = useState([]),
           [gender, setGender] = useState(""),
           [price, setPrice] = useState(""),
           [sizes, setSizes] = useState([]);
@@ -48,32 +48,20 @@ const ProductEdit = () => {
         }
     },[id])
 
-    const categories = [
-        {
-            id:"tops",
-            name:"トップス"
-        },
-        {
-            id:"tops",
-            name:"トップス"
-        },
-        {
-            id:"tops",
-            name:"トップス"
-        },
-        {
-            id:"tops",
-            name:"トップス"
-        },
-        {
-            id:"tops",
-            name:"トップス"
-        },
-        {
-            id:"tops",
-            name:"トップス"
-        },
-    ];
+    useEffect(() => {
+        db.collection('categories').orderBy("order", "asc").get().then(snapshots => {
+            const list = []
+            snapshots.forEach(snapshot => {
+                const data = snapshot.data()
+                list.push({
+                    id:data.id,
+                    name:data.name,
+                })
+            })
+            setCategories(list)
+        });
+    },[])
+
     const genders = [
         {id: "all", name: "すべて"},
         {id: "male", name: "メンズ"},

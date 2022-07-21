@@ -15,13 +15,15 @@ import { Route, Switch } from "react-router";
 // UserMyPage,
 // "./templates";
 import {
-  Home,
   SignIn,
   Reset,
   SignUp,
   ProductEdit,
   ProductList,
   ProductDetail,
+  CartList,
+  OrderConfirm,
+  OrderHistory,
 } from "./templates";
 import Auth from "./Auth";
 
@@ -35,6 +37,9 @@ const Router = () => {
         <Route exact path="(/)?" component={ProductList} />
         <Route exact path="/product/:id" component={ProductDetail} />
         <Route path="/product/edit(/:id)?" component={ProductEdit} />
+        <Route exact path="/cart" component={CartList} />
+        <Route exact path="/order/confirm" component={OrderConfirm} />
+        <Route exact path="/order/history" component={OrderHistory} />
       </Auth>
 
       {/* <Route exact path="/signin" component={SignIn} />

@@ -45,7 +45,7 @@ const HeaderMenu = (props) => {
             });
 
         return () => unsubscribe()
-    },[]);
+    },[dispatch]);
 
     return (
         <>

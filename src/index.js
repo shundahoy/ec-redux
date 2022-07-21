@@ -7,7 +7,7 @@ import createStore from "./reducks/store/store";
 import * as History from "history";
 import { ConnectedRouter } from "connected-react-router";
 import { MuiThemeProvider } from "@material-ui/core";
-import { thme } from "./assets/theme";
+import { theme } from "./assets/theme";
 const history = History.createBrowserHistory();
 export const store = createStore(history);
 
@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
         <React.StrictMode>
           <App />
         </React.StrictMode>
